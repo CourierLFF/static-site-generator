@@ -15,7 +15,10 @@ class HTMLNode():
         return returned_string
     
     def __repr__(self):
-        return f"TAG: {self.tag} VALUE: {self.value} CHILDREN: {self.children} PROPS: {self.props_to_html()}"
+        if self.props == None:
+            return f"TAG: {self.tag} VALUE: {self.value} CHILDREN: {self.children} PROPS: None"
+        else:
+            return f"TAG: {self.tag} VALUE: {self.value} CHILDREN: {self.children} PROPS: {self.props_to_html()}"
     
 
 class LeafNode(HTMLNode):
