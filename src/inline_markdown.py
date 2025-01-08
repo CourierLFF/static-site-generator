@@ -1,3 +1,4 @@
+import re
 from textnode import TextNode, TextType
 
 
@@ -20,3 +21,19 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
                 split_nodes.append(TextNode(sections[i], text_type))
         new_nodes.extend(split_nodes)
     return new_nodes
+
+def extract_markdown_images(text):
+    tuple_list = []
+    alt_text_list = re.findall(r"\[(.*?)\]", text)
+    img_list = re.findall(r"\((.*?)\)", text)
+    for x in range(len(img_list)):
+        tuple_list.append((alt_text_list[x], img_list[x]))
+    return (tuple_list)
+
+def extract_markdown_links(text):
+    tuple_list = []
+    link_text_list = re.findall(r"\[(.*?)\]", text)
+    link_list = re.findall(r"\((.*?)\)", text)
+    for x in range(len(link_list)):
+        tuple_list.append((link_text_list[x], link_list[x]))
+    return (tuple_list)
